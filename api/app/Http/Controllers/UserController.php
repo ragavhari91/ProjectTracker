@@ -14,84 +14,65 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 
-class UserController extends Controller {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-            return json_encode(User::all());
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-           return json_encode(User::all());
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store(Request $request)
-	{
-              $user       =  new User();
-             $email      =  $request->login_id;
+class UserController extends Controller 
+{
+        private function isUserExist($user_email)
+        {
+            $user    = new User();
+            $result  = $user->where('user_email','=',$user_email)->count();
+            if($result != 0)
+            {
+                $userExist  = true;
+            }
+            else
+            {
+                $userExist = false;
+            }
+            return $userExist;
+        }
+        
+	public function registerUser(Request $request)
+        {
+            $first_name  = $request->first_name;
+            $last_name   = $request->last_name;
+            $email       = $request->email;
+            $password    = $request->password;
             
-            return json_encode(array("user"=>$email));
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+            // check if email already exists
+           if($this->isUserExist($email))
+           {
+               $response = array("status"=>"Failure","message"=>"Email already exist");
+           }
+           else
+           {
+                $user        = new User();
+            
+                $user->user_first_name = $first_name;
+                $user->user_last_name  = $last_name;
+                $user->user_email      = $email;
+                $user->user_password   = $password; 
+                $user->user_role       = "1002"; //register as guest
+                $user->user_status     = "1000"; //status user active
+                try
+                {
+                    $result = $user->save();
+                    if($result)
+                    {
+                        $response = array("status"=>"Success","message"=>"Data Inserted Successfully");
+                    }
+                    else 
+                    {
+                        $response = array("status"=>"Failure","message"=>"Data Insertion Failure");
+                    }
+                } 
+                catch (Exception $ex) 
+                {
+                    $response = array("status"=>"Failure","message"=>"Error occurs please try again later","exception"=>$e);
+                }
+           }
+           return json_encode($response);
+        }
+        
         
         public function login(Request $request)
         {
@@ -139,4 +120,7 @@ class UserController extends Controller {
                             ->get();
             return $result;
         }
+        
+        
+        
 }

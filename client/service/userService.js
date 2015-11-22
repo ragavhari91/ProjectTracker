@@ -26,6 +26,8 @@
                 url: HOST + USER_REGISTRATION
             }).then(function (response) {
                 return response.data;
+            }).catch(function(error){
+               return error.data; 
             });
         }
 

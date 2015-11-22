@@ -24,7 +24,13 @@
 
         //registration submit is handled here
         $scope.registrationSubmit = function () {
-            userService.userRegistration($scope.registration_data).then(function (response) {
+            var data = {
+                "first_name":$scope.registration_data.first_name,
+                "last_name":$scope.registration_data.last_name,
+                "email":$scope.registration_data.email_id,
+                "password":$scope.registration_data.password
+            };
+            userService.userRegistration(data).then(function(response) {
                 console.log(response);
             });
         }

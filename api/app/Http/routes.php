@@ -28,7 +28,10 @@ Route::controllers([
 
 Route::group(['prefix' => 'webapi'], function () {
     Route::post('user/login', 'UserController@login');
+    Route::post('user/register','UserController@registerUser');
     Route::resource('user', 'UserController');
+    
+    
 });
 
 Route::group(['prefix' => 'mobileapi'], function () {
