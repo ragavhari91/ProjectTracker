@@ -5,7 +5,8 @@
     function userService($q, $http) {
         return {
             userRegistration: userRegistration,
-            userLogin: userLogin
+            userLogin: userLogin,
+            forgotPassword : forgotPassword,
 
         }
 
@@ -30,6 +31,18 @@
                return error.data; 
             });
         }
+        function forgotPassword(data) {
+            alert("service called");
+            alert("json is"+JSON.stringify(data));
+            return $http({
+                method: 'POST',
+                data: data,
+                url: HOST + USER_FORGOT_PASSWORD
+            }).then(function (response) {
+                return response.data;
+            });
+        }
+
 
     }
 }());

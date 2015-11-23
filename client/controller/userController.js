@@ -46,6 +46,17 @@
             // check if menu value is not equal to null;
             
         }
+        
+        $scope.registrationSubmit = function()
+        {  
+             var data = {"email":$scope.registration_data.email}
+             userService.forgotPassword(data).then(function (response){
+                   console.log(response);
+             });
+            
+            
+        }
+       
     }
 
 }());
