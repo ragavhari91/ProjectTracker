@@ -27,8 +27,8 @@ Route::controllers([
 
 
 Route::group(['prefix' => 'webapi'], function () {
-    Route::post('user/login', 'UserController@login');
-    Route::post('user/register','UserController@registerUser');
+    Route::post('user/login', 'Web\UserController@login');
+    Route::post('user/register','Web\UserController@registerUser');
     Route::resource('user', 'UserController');
     
     

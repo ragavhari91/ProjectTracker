@@ -1,5 +1,5 @@
 <?php 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Requests;
 
@@ -80,7 +80,7 @@ class UserController extends Controller
               $email      =  $request->login_id;
               $password   =  $request->password;
 
-              $result     =  $user->where('user_email',$email)->where('user_password',$password)->where('user_status',1000)->first();
+              $result     =  $user->select('user.*')->where('user_email',$email)->where('user_password',$password)->where('user_status',1000)->first();
               
               if($result == null)
               {
@@ -88,12 +88,17 @@ class UserController extends Controller
               }
               else
               {
-                  $data = array("menu"=>$this->getMenuofUser($result->user_role),
+                  $data = array("userdetail"=>$result,"menu"=>$this->getMenuofUser($result->user_role),
                                 "responsibility"=>$this->getResponsibilityofUser($result->user_role));
                   $response = array("status"=>"Success","data"=>$data);
               }
 
               return json_encode($response);
+        }
+        
+        private function getLoginSession($email)
+        {
+            
         }
         
         private function getMenuofUser($role_id)

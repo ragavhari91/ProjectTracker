@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router','ngMaterial']);
+var app = angular.module('app', ['ui.router','ngMaterial','ngMessages']);
 
 app.config(function($stateProvider, $urlRouterProvider,$mdThemingProvider,$mdIconProvider) {
     

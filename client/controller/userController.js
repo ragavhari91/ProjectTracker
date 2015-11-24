@@ -1,8 +1,8 @@
 (function () {
 
-    app.controller('userController', ['$scope', '$location', 'userService', '$state', userController]);
+    app.controller('userController', ['$scope', '$location', 'userService', '$state' , '$mdToast', userController]);
 
-    function userController($scope, $location, userService, $state) {
+    function userController($scope, $location, userService, $state,$mdToast) {
         
         //login submit is handled here 
         $scope.loginSubmit = function () {
@@ -12,12 +12,14 @@
                 {
                     window.localStorage.setItem("menuDetails",JSON.stringify(response.data.menu));
                     window.localStorage.setItem("respDetails",JSON.stringify(response.data.responsibility));
+                    $state.go('dashboard.home');
                 }
                 else
                 {
+                    $mdToast.show($mdToast.simple().content('Hello!'));
                     $scope.errormessage = response.message;
                 }
-                $state.go('dashboard.home');
+                
             });
 
         }
