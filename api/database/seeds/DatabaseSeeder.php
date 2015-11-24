@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder {
                 $this->call('MenuTableSeeder');
                 $this->call('MenuResponsibilityTableSeeder');
                 $this->call('UserTableSeeder');
+                $this->call('ProjectTableSeeder');
+                $this->call('ProjectTypeTableSeeder');
+                $this->call('ProjectMembersTableSeeder');
 	}
 
 }
@@ -245,7 +248,65 @@ class UserTableSeeder extends Seeder {
                 DB::table('user')->insert(array(
                     array('id'=>'1000','user_first_name'=>'Ragav','user_last_name'=>'Hari','user_age'=>'25','user_gender'=>'1','user_email'=>'ragavhari91@gmail.com','user_password'=>'Ragav','user_mobile'=>'8056598186','user_role'=>'1000','user_status'=>'1000'),
                     array('id'=>'1001','user_first_name'=>'Uva','user_last_name'=>'Prakash','user_age'=>'24','user_gender'=>'1','user_email'=>'uva@gmail.com','user_password'=>'uva','user_mobile'=>'7897897897','user_role'=>'1000','user_status'=>'1000'),
-                    array('id'=>'1002','user_first_name'=>'Vigneshmuthu','user_last_name'=>'smvm','user_age'=>'25','user_gender'=>'1','user_email'=>'vigneshmuthu.s.m@gmail.com','user_password'=>'vignesh','user_mobile'=>'8978978978','user_role'=>'1000','user_status'=>'1000')
+                    array('id'=>'1002','user_first_name'=>'Vigneshmuthu','user_last_name'=>'smvm','user_age'=>'25','user_gender'=>'1','user_email'=>'vigneshmuthu.s.m@gmail.com','user_password'=>'vignesh','user_mobile'=>'8978978978','user_role'=>'1000','user_status'=>'1000'),
+                    array('id'=>'1003','user_first_name'=>'Harish','user_last_name'=>'Balaji','user_age'=>'25','user_gender'=>'1','user_email'=>'harish@gmail.com','user_password'=>'harish','user_mobile'=>'9876543210','user_role'=>'1000','user_status'=>'1000')
+                ));
+	}
+
+}
+
+class ProjectTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		DB::table('project')->delete();
+                
+                DB::table('user')->insert(array(
+                    array('id'=>'1000','project_name'=>'Sample web project','project_type'=>'1000','project_status'=>'','project_description'=>''),
+                    
+                ));
+	}
+
+}
+
+class ProjectTypeTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		DB::table('project_type')->delete();
+                
+                DB::table('project_type')->insert(array(
+                    array('id'=>'1000','name'=>'Web Application','description'=>'Sample description for web app'),
+                    array('id'=>'1001','name'=>'Mobile Application','description'=>'Sample description for mobile app')
+                ));
+	}
+
+}
+
+class ProjectMembersTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		DB::table('project_members')->delete();
+                
+                DB::table('project_members')->insert(array(
+                    array('id'=>'1000','project_id'=>'','user_id'=>'','user_type'=>'','user_status'=>''),
+                    
                 ));
 	}
 
