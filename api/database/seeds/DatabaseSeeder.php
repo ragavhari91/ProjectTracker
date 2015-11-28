@@ -28,8 +28,6 @@ class DatabaseSeeder extends Seeder {
                 $this->call('MenuResponsibilityTableSeeder');
                 $this->call('UserTableSeeder');
                 $this->call('ProjectTypeTableSeeder');
-                $this->call('ProjectTableSeeder');
-                $this->call('ProjectMembersTableSeeder');
 	}
 
 }
@@ -289,43 +287,3 @@ class ProjectTypeTableSeeder extends Seeder {
 
 }
 
-class ProjectTableSeeder extends Seeder {
-
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('project')->delete();
-                
-                DB::table('project')->insert(array(
-                    array('id'=>'1000','project_name'=>'WebProject','project_type'=>'1000','project_status'=>'1004','project_description'=>'Sample Web Application'),
-                    
-                ));
-	}
-
-}
-
-class ProjectMembersTableSeeder extends Seeder {
-
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('project_members')->delete();
-                
-                DB::table('project_members')->insert(array(
-                    array('id'=>'1000','project_id'=>'1000','user_id'=>'1000','user_type'=>'1003','user_status'=>'1000'),
-                    array('id'=>'1001','project_id'=>'1000','user_id'=>'1001','user_type'=>'1005','user_status'=>'1000'),
-                    array('id'=>'1002','project_id'=>'1000','user_id'=>'1002','user_type'=>'1005','user_status'=>'1000'),
-                    array('id'=>'1003','project_id'=>'1000','user_id'=>'1003','user_type'=>'1005','user_status'=>'1000'),
-                    
-                ));
-	}
-
-}
