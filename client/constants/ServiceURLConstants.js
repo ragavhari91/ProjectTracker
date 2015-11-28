@@ -3,4 +3,4 @@ var HOST = "http://localhost:8000/webapi";
 var USER_REGISTRATION = "/user/register";
 var USER_LOGIN = "/user/login";
 
-var USER_FORGOT_PASSWORD="user/forgotpassword";
+var USER_FORGOT_PASSWORD="/user/forgotpassword";
