@@ -35,8 +35,8 @@ class ProjectRelated extends Migration {
                     $table->increments('id');
                     $table->unsignedInteger('project_id');
                     $table->unsignedInteger('user_id');
-                    $table->string('user_type');
-                    $table->string('user_status');
+                    $table->unsignedInteger('user_type');
+                    $table->unsignedInteger('user_status');
                 });
                 
                 Schema::table('project_members',function(Blueprint $table){

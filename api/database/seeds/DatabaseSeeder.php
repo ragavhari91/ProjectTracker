@@ -23,12 +23,12 @@ class DatabaseSeeder extends Seeder {
                 $this->call('RoleTableSeeder');
                 $this->call('RoleMappingTableSeeder');
                 $this->call('ResponsibilityTableSeeder');
-                $this->call('RoleResponsibilityMappingTableSeeder');
+                $this->call('RoleResponsibilityTableSeeder');
                 $this->call('MenuTableSeeder');
                 $this->call('MenuResponsibilityTableSeeder');
                 $this->call('UserTableSeeder');
-                $this->call('ProjectTableSeeder');
                 $this->call('ProjectTypeTableSeeder');
+                $this->call('ProjectTableSeeder');
                 $this->call('ProjectMembersTableSeeder');
 	}
 
@@ -72,6 +72,8 @@ class StatusTableSeeder extends Seeder {
                     array('id'=>'1001','name'=>'User InActive','description'=>'User cannot login'),
                     array('id'=>'1002','name'=>'Role Active','description'=>'Role exists'),
                     array('id'=>'1003','name'=>'Role InActive','description'=>'Role Not Exists'),
+                    array('id'=>'1004','name'=>'Project Active','description'=>'Project Exists'),
+                    array('id'=>'1005','name'=>'Project InActive','description'=>'Project Not Exists'),
                     
                 ));
 	}
@@ -93,7 +95,9 @@ class StatusMappingTableSeeder extends Seeder {
                     array('status_id'=>'1000','status_group_id'=>'1000'),
                     array('status_id'=>'1001','status_group_id'=>'1000'),
                     array('status_id'=>'1002','status_group_id'=>'1002'),
-                    array('status_id'=>'1003','status_group_id'=>'1002')
+                    array('status_id'=>'1003','status_group_id'=>'1002'),
+                    array('status_id'=>'1004','status_group_id'=>'1001'),
+                    array('status_id'=>'1005','status_group_id'=>'1001'),
                 ));
 	}
 
@@ -135,7 +139,11 @@ class RoleTableSeeder extends Seeder {
                 DB::table('role')->insert(array(
                     array('id'=>'1000','name'=>'Super Admin','description'=>'Manager of entire application','status_code'=>'1002'),
                     array('id'=>'1001','name'=>'Admin','description'=>'Sub Manager','status_code'=>'1002'),
-                    array('id'=>'1002','name'=>'Guest','description'=>'Test user','status_code'=>'1002')
+                    array('id'=>'1002','name'=>'Guest','description'=>'Test user','status_code'=>'1002'),
+                    array('id'=>'1003','name'=>'Project Admin','description'=>'Admin of the project','status_code'=>'1002'),
+                    array('id'=>'1004','name'=>'Project Manager','description'=>'Manages the project','status_code'=>'1002'),
+                    array('id'=>'1005','name'=>'Developer','description'=>'Develops the project','status_code'=>'1002'),
+                    
                 ));
 	}
 
@@ -155,7 +163,10 @@ class RoleMappingTableSeeder extends Seeder {
                 DB::table('role_mapping')->insert(array(
                     array('role_id'=>'1000','role_group_id'=>'1000'),
                     array('role_id'=>'1001','role_group_id'=>'1000'),
-                    array('role_id'=>'1002','role_group_id'=>'1000')
+                    array('role_id'=>'1002','role_group_id'=>'1000'),
+                    array('role_id'=>'1003','role_group_id'=>'1001'),
+                    array('role_id'=>'1004','role_group_id'=>'1001'),
+                    array('role_id'=>'1005','role_group_id'=>'1001'),
                 ));
 	}
 
@@ -173,13 +184,13 @@ class ResponsibilityTableSeeder extends Seeder {
 		DB::table('responsibility')->delete();
                 
                 DB::table('responsibility')->insert(array(
-                    array('id'=>'1000','name'=>'Manage Project','description'=>''),
-                    array('id'=>'1001','name'=>'Manage User','description'=>'')
+                    array('id'=>'1000','name'=>'Manage Project','description'=>'One who manages project'),
+                    array('id'=>'1001','name'=>'Manage User','description'=>'One who manages user')
                  ));
 	}
 }
 
-class RoleResponsibilityMappingTableSeeder extends Seeder {
+class RoleResponsibilityTableSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
@@ -191,8 +202,12 @@ class RoleResponsibilityMappingTableSeeder extends Seeder {
 		DB::table('role_responsibility')->delete();
                 
                 DB::table('role_responsibility')->insert(array(
-                    array('id'=>'1000','role_id'=>'1000','responsibility_id'=>'1000'),
-                    array('id'=>'1001','role_id'=>'1000','responsibility_id'=>'1001')
+                    array('id'=>'1000','role_id'=>'1000','responsibility_id'=>'1001'),
+                    array('id'=>'1001','role_id'=>'1000','responsibility_id'=>'1001'),
+                    array('id'=>'1002','role_id'=>'1000','responsibility_id'=>'1001'),
+                    array('id'=>'1003','role_id'=>'1000','responsibility_id'=>'1000'),
+                    array('id'=>'1004','role_id'=>'1000','responsibility_id'=>'1000'),
+                    array('id'=>'1005','role_id'=>'1000','responsibility_id'=>'1000'),
                  ));
 	}
 }
@@ -255,25 +270,6 @@ class UserTableSeeder extends Seeder {
 
 }
 
-class ProjectTableSeeder extends Seeder {
-
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		DB::table('project')->delete();
-                
-                DB::table('user')->insert(array(
-                    array('id'=>'1000','project_name'=>'Sample web project','project_type'=>'1000','project_status'=>'','project_description'=>''),
-                    
-                ));
-	}
-
-}
-
 class ProjectTypeTableSeeder extends Seeder {
 
 	/**
@@ -293,6 +289,25 @@ class ProjectTypeTableSeeder extends Seeder {
 
 }
 
+class ProjectTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		DB::table('project')->delete();
+                
+                DB::table('project')->insert(array(
+                    array('id'=>'1000','project_name'=>'WebProject','project_type'=>'1000','project_status'=>'1004','project_description'=>'Sample Web Application'),
+                    
+                ));
+	}
+
+}
+
 class ProjectMembersTableSeeder extends Seeder {
 
 	/**
@@ -305,7 +320,10 @@ class ProjectMembersTableSeeder extends Seeder {
 		DB::table('project_members')->delete();
                 
                 DB::table('project_members')->insert(array(
-                    array('id'=>'1000','project_id'=>'','user_id'=>'','user_type'=>'','user_status'=>''),
+                    array('id'=>'1000','project_id'=>'1000','user_id'=>'1000','user_type'=>'1003','user_status'=>'1000'),
+                    array('id'=>'1001','project_id'=>'1000','user_id'=>'1001','user_type'=>'1005','user_status'=>'1000'),
+                    array('id'=>'1002','project_id'=>'1000','user_id'=>'1002','user_type'=>'1005','user_status'=>'1000'),
+                    array('id'=>'1003','project_id'=>'1000','user_id'=>'1003','user_type'=>'1005','user_status'=>'1000'),
                     
                 ));
 	}
