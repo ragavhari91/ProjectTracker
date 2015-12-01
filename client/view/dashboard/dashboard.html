@@ -1,0 +1,26 @@
+ <div  ng-controller="userController" layout-fill layout="vertical">
+
+        <md-sidenav  class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+            <md-toolbar  layout="row">
+                    <span class="md-toolbar-tools"></span>
+            </md-toolbar>
+            <md-menu-content layout="column" flex ng-init="getMenuContent()">
+                <a ng-repeat="menu in menuitems track by $index" ui-sref="{{menu.url}}">
+                    {{menu.name}}
+                </a>
+            </md-menu-content>
+        </md-sidenav>
+
+       <div layout="column" flex md-theme="green" id="content">
+            <md-toolbar layout="row">
+                  <div class="md-toolbar-tools">
+                    <i class="fa fa-bars pointer" ng-click="toggleMenu()" hide-gt-lg></i>
+                    <h1 flex>Food Dhaba HMS</h1>
+                  </div>
+                 </md-toolbar>
+            </md-toolbar>
+            <md-content ui-view layout="column" flex>
+                
+            </md-content>
+        </div>
+    </div>

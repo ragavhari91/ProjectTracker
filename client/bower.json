@@ -1,0 +1,38 @@
+{
+  "name": "Project Tracker",
+  "authors": [
+    "Ragav <ragavhari91@gmail.com>",
+    "Uva <>",
+    "Vignesh<>"
+  ],
+  "description": "Project Management System",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/components/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.4.7",
+    "angular-ui": "~0.4.0",
+    "karma": "~0.4.6",
+    "mocha": "~2.3.3",
+    "chai": "~3.4.0",
+    "sinon": "~1.17.2",
+    "angular-material": "~0.11.4",
+    "angular-ui-router": "ui-router#~0.2.15",
+    "font-awesome": "~4.4.0",
+    "angular-messages": "~1.4.8"
+  },
+  "resolutions": {
+    "angular": "~1.4.7"
+  }
+}
